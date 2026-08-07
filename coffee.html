@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bean Boutique - Coffee Selection</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Back to Top Button Styling */
+        #backToTopBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1030;
+            border: none;
+            outline: none;
+            background-color: #6f4e37;
+            color: white;
+            cursor: pointer;
+            padding: 12px 16px;
+            border-radius: 50%;
+            font-size: 18px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease;
+        }
+
+        #backToTopBtn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #backToTopBtn:hover {
+            background-color: #523927;
+            transform: translateY(-3px);
+        }
+
+        /* Footer Map Section Styling */
+        .footer-map-container {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* Modal Nav Trigger Cursor */
+        .cart-nav-link {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Add to Cart Button Styling */
+        .btn-add-cart {
+            background-color: #6f4e37;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 0.95rem;
+            width: 100%;
+            margin-top: 1rem;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .btn-add-cart:hover {
+            background-color: #523927;
+            color: white;
+        }
+
+        .btn-add-cart:active {
+            transform: scale(0.98);
+        }
+
+        /* Search Highlight Styling */
+        mark.search-highlight {
+            background-color: #fce2ae;
+            color: #4a3424;
+            padding: 0 3px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>Bean Boutique</h1>
+        </div>
+        <nav>
+            <ul>
+                <!-- Home Menu with Sub-Menu -->
+                <li class="dropdown">
+                    <a href="index.html" >Home <i class="bi bi-chevron-down ms-1"></i></a>
+                    <ul class="dropdown-menu-custom">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="story.html">Our Story</a></li>
+                        <li><a href="location.html">Location & Hours</a></li>
+                    </ul>
+                </li>
+                <li><a href="coffee.html" class="active">Coffee Selection</a></li>
+                <li><a href="equipment.html">Brewing Equipment</a></li>
+                <li><a href="events.html">Events</a></li>
+                
+                <!-- Modal Trigger Link for Shopping Cart -->
+                <li>
+                    <a class="cart-nav-link" id="cartModalTrigger">
+                        Shopping Cart <span class="badge bg-warning text-dark" id="cartCountBadge">0</span>
+                    </a>
+                </li>
+                
+                <li><a href="offers.html">Special Offers</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="py-4">
+            <h2 class="section-title">Our Unique Coffee Blends</h2>
+            
+            <div style="max-width: 400px; margin: 0 auto 3rem auto; text-align: center;">
+                <label for="coffeeSearch" class="animated-search-label form-label fw-bold">Live Text Search Explorer:</label>
+                <input type="text" id="coffeeSearch" class="form-control" placeholder="Type a blend name (e.g., Espresso)..." onkeyup="filterCoffee()">
+            </div>
+
+            <div class="grid-container" id="coffeeCatalogue">
+                
+                <!-- Coffee Box 1 -->
+                <div class="coffee-box d-flex flex-column justify-content-between" data-name="ethiopia single origin yirgacheffe">
+                    <div>
+                        <img src="images/coff_selection/cof1.jpg" alt="Ethiopian Yirgacheffe">
+                        <h3>Ethiopia Single Origin</h3>
+                        <p style="font-style: italic; color: #777; margin: 0.5rem 0;">Tasting Notes: Citrus, Floral, Honey</p>
+                        <p>Recommended Brewing Method: Pour Over (V60) / Chemex</p>
+                        <p class="fw-bold fs-5 text-dark mt-2 mb-0">£14.50</p>
+                    </div>
+                    <button class="btn btn-add-cart add-to-cart-btn" data-title="Ethiopia Single Origin Beans" data-subtitle="250g Bag - Whole Bean" data-price="14.50">
+                        <i class="bi bi-bag-plus me-1"></i> Add to Cart
+                    </button>
+                </div>
+
+                <!-- Coffee Box 2 -->
+                <div class="coffee-box d-flex flex-column justify-content-between" data-name="velvet espresso blend signature roast">
+                    <div>
+                        <img src="images/coff_selection/cof2.jpg" alt="Velvet Espresso">
+                        <h3>Velvet Espresso Blend</h3>
+                        <p style="font-style: italic; color: #777; margin: 0.5rem 0;">Tasting Notes: Dark Chocolate, Creamy Caramel</p>
+                        <p>Recommended Brewing Method: Espresso Machine / Moka Pot</p>
+                        <p class="fw-bold fs-5 text-dark mt-2 mb-0">£13.00</p>
+                    </div>
+                    <button class="btn btn-add-cart add-to-cart-btn" data-title="Velvet Espresso Blend" data-subtitle="250g Bag - Espresso Grind" data-price="13.00">
+                        <i class="bi bi-bag-plus me-1"></i> Add to Cart
+                    </button>
+                </div>
+
+                <!-- Coffee Box 3 -->
+                <div class="coffee-box d-flex flex-column justify-content-between" data-name="sumatra mandheling dark bold roast">
+                    <div>
+                        <img src="images/coff_selection/cof3.jpg" alt="Sumatra Mandheling">
+                        <h3>Sumatra Mandheling</h3>
+                        <p style="font-style: italic; color: #777; margin: 0.5rem 0;">Tasting Notes: Earthy, Cedar, Complex Spice</p>
+                        <p>Recommended Brewing Method: French Press</p>
+                        <p class="fw-bold fs-5 text-dark mt-2 mb-0">£15.00</p>
+                    </div>
+                    <button class="btn btn-add-cart add-to-cart-btn" data-title="Sumatra Mandheling" data-subtitle="250g Bag - Coarse Grind" data-price="15.00">
+                        <i class="bi bi-bag-plus me-1"></i> Add to Cart
+                    </button>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- GLOBAL SHOPPING CART MODAL -->
+    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-white" style="background-color: #4a3424;">
+                    <h4 class="modal-title h5" id="cartModalLabel"><i class="bi bi-cart-check me-2"></i>Your Shopping Basket</h4>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body text-dark">
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                            <thead>
+                                <tr style="background-color: #4a3424; color: #fff;">
+                                    <th>Product Details</th>
+                                    <th class="text-center">Qty</th>
+                                    <th class="text-end">Price</th>
+                                    <th class="text-end">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cartItemsContainer">
+                                <tr>
+                                    <td colspan="4" class="text-center py-4 text-muted">Your basket is currently empty. Add items to see them here!</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="p-3 bg-light rounded text-end mt-3">
+                        <p class="mb-1">Subtotal: <strong id="cartSubtotal">£0.00</strong></p>
+                        <small class="text-muted d-block mb-0">Shipping: Calculated at next step</small>
+                    </div>
+                </div>
+
+                <div class="modal-footer d-flex justify-content-between">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Continue Shopping</button>
+                    <button type="button" class="btn text-white" id="checkoutBtn" style="background-color: #6f4e37;">
+                        Proceed to Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Go to Top Button -->
+    <button id="backToTopBtn" title="Go to top" aria-label="Scroll to top">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- Footer Section -->
+    <footer class="bg-dark text-light pt-5 pb-3">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-5">
+                    <h3 class="h4 mb-3 text-warning">Visit Bean Boutique</h3>
+                    <p class="mb-2"><i class="bi bi-geo-alt-fill text-warning me-2"></i>123 Artisan Coffee Lane, Brewtown</p>
+                    <p class="mb-2"><i class="bi bi-clock-fill text-warning me-2"></i>Mon - Sun: 7:00 AM - 8:00 PM</p>
+                    <p class="mb-2"><i class="bi bi-telephone-fill text-warning me-2"></i>(555) 123-4567</p>
+                </div>
+                
+                <div class="col-md-7">
+                    <div class="footer-map-container">
+                        <iframe 
+                            title="Bean Boutique Location Map"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.9537353153169!3d-37.81627977975171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sEnvato!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus" 
+                            height="220" 
+                            style="border:0; width: 100%;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="mt-4 mb-3 border-secondary">
+            <p class="text-center mb-0">&copy; 2026 Bean Boutique Coffee Shop. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Enhanced Live Search Plugin Logic
+        function filterCoffee() {
+            const input = document.getElementById('coffeeSearch').value.trim().toLowerCase();
+            const keywords = input.split(/\s+/).filter(k => k.length > 0);
+            const boxes = document.querySelectorAll('.coffee-box');
+            const catalogueContainer = document.getElementById('coffeeCatalogue');
+            
+            let matchesCount = 0;
+
+            boxes.forEach(box => {
+                // Save original unhighlighted state on initial run
+                if (!box.dataset.originalHtml) {
+                    box.dataset.originalHtml = box.innerHTML;
+                }
+
+                // Reset card HTML to restore state before applying new query highlight
+                box.innerHTML = box.dataset.originalHtml;
+
+                // Combine searchable attributes and visible text
+                const fullText = (box.getAttribute('data-name') + " " + box.innerText).toLowerCase();
+
+                // Multi-word keyword match check
+                const matchesAllKeywords = keywords.every(kw => fullText.includes(kw));
+
+                if (keywords.length === 0 || matchesAllKeywords) {
+                    box.style.display = "";
+                    box.style.opacity = "1";
+                    matchesCount++;
+
+                    // Highlight active keywords inside heading and descriptions
+                    if (keywords.length > 0) {
+                        highlightKeywords(box, keywords);
+                    }
+                } else {
+                    box.style.display = "none";
+                }
+            });
+
+            // Re-attach listeners for dynamically recreated DOM buttons
+            attachCartEventListeners();
+
+            // Toggle "No Results Found" message
+            let noResultsMsg = document.getElementById('noResultsMessage');
+            if (matchesCount === 0) {
+                if (!noResultsMsg) {
+                    noResultsMsg = document.createElement('div');
+                    noResultsMsg.id = 'noResultsMessage';
+                    noResultsMsg.className = 'text-center py-5 text-muted col-12 fw-bold fs-5';
+                    noResultsMsg.innerHTML = `<i class="bi bi-search me-2"></i>No coffee blends matched your search for "${input}".`;
+                    catalogueContainer.appendChild(noResultsMsg);
+                }
+            } else if (noResultsMsg) {
+                noResultsMsg.remove();
+            }
+        }
+
+        // Helper: Highlight term inside card nodes
+        function highlightKeywords(container, keywords) {
+            const targetNodes = container.querySelectorAll('h3, p');
+            targetNodes.forEach(node => {
+                let html = node.innerHTML;
+                keywords.forEach(kw => {
+                    if (!kw) return;
+                    const regex = new RegExp(`(${escapeRegExp(kw)})`, 'gi');
+                    html = html.replace(regex, '<mark class="search-highlight">$1</mark>');
+                });
+                node.innerHTML = html;
+            });
+        }
+
+        // Helper: Escape Regex characters
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        // Helper: Re-bind cart button events after search resets innerHTML
+        function attachCartEventListeners() {
+            document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+                btn.onclick = () => {
+                    const title = btn.getAttribute('data-title');
+                    const subtitle = btn.getAttribute('data-subtitle');
+                    const price = parseFloat(btn.getAttribute('data-price'));
+
+                    let cart = JSON.parse(localStorage.getItem('beanBoutiqueCart')) || [];
+                    const existing = cart.find(item => item.title === title);
+
+                    if (existing) {
+                        existing.qty += 1;
+                    } else {
+                        cart.push({ title, subtitle, price, qty: 1 });
+                    }
+
+                    localStorage.setItem('beanBoutiqueCart', JSON.stringify(cart));
+                    updateCartUI();
+
+                    // Button feedback animation
+                    const origHtml = btn.innerHTML;
+                    btn.innerHTML = `<i class="bi bi-check-lg me-1"></i> Added!`;
+                    btn.classList.replace('btn-add-cart', 'btn-success');
+                    setTimeout(() => {
+                        btn.innerHTML = origHtml;
+                        btn.classList.replace('btn-success', 'btn-add-cart');
+                    }, 1200);
+                };
+            });
+        }
+
+        // Cart UI State Management
+        function updateCartUI() {
+            const cart = JSON.parse(localStorage.getItem('beanBoutiqueCart')) || [];
+            const cartCountBadge = document.getElementById('cartCountBadge');
+            const cartItemsContainer = document.getElementById('cartItemsContainer');
+            const cartSubtotal = document.getElementById('cartSubtotal');
+            
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            
+            if (cartCountBadge) {
+                cartCountBadge.textContent = totalItems;
+            }
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="text-center py-4 text-muted">Your basket is currently empty. Add items to see them here!</td>
+                    </tr>`;
+                cartSubtotal.textContent = '£0.00';
+                return;
+            }
+
+            let subtotal = 0;
+            cartItemsContainer.innerHTML = cart.map(item => {
+                const itemTotal = item.price * item.qty;
+                subtotal += itemTotal;
+                return `
+                    <tr>
+                        <td>
+                            <strong>${item.title}</strong><br>
+                            <small class="text-muted">${item.subtitle}</small>
+                        </td>
+                        <td class="text-center">${item.qty}</td>
+                        <td class="text-end">£${item.price.toFixed(2)}</td>
+                        <td class="text-end">£${itemTotal.toFixed(2)}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            cartSubtotal.textContent = `£${subtotal.toFixed(2)}`;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const cartModalEl = document.getElementById('cartModal');
+            const cartModalInstance = new bootstrap.Modal(cartModalEl);
+
+            // Render existing cart on load
+            updateCartUI();
+            attachCartEventListeners();
+
+            // Open Modal Trigger
+            document.getElementById("cartModalTrigger").addEventListener("click", (e) => {
+                e.preventDefault();
+                cartModalInstance.show();
+            });
+
+            // Checkout Handler
+            document.getElementById("checkoutBtn").addEventListener("click", () => {
+                const cart = JSON.parse(localStorage.getItem('beanBoutiqueCart')) || [];
+                if (cart.length === 0) {
+                    alert('Your basket is empty!');
+                } else {
+                    alert('Checkout function will be available once back-end databases are linked!');
+                    cartModalInstance.hide();
+                }
+            });
+
+            // Modal Backdrop Cleanup Fix
+            cartModalEl.addEventListener('hidden.bs.modal', () => {
+                document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+                document.body.classList.remove('modal-open');
+                document.body.style.overflow = '';
+                document.body.style.paddingRight = '';
+            });
+
+            // Back to Top Scroll Logic
+            const backToTopBtn = document.getElementById("backToTopBtn");
+            if (backToTopBtn) {
+                window.addEventListener("scroll", () => {
+                    backToTopBtn.classList.toggle("show", window.scrollY > 300);
+                });
+                backToTopBtn.addEventListener("click", () => {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
