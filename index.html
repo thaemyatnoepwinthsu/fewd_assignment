@@ -7,14 +7,11 @@
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* Back to Top Button Styling */
         #backToTopBtn {
             position: fixed;
             bottom: 30px;
@@ -44,20 +41,17 @@
             transform: translateY(-3px);
         }
 
-        /* Footer Map Section Styling */
         .footer-map-container {
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        /* Modal Nav Trigger Cursor */
         .cart-nav-link {
             cursor: pointer;
             user-select: none;
         }
 
-        /* Custom Promo Popup */
         .custom-promo-modal {
             display: none;
             position: fixed;
@@ -92,6 +86,23 @@
             font-size: 24px;
             cursor: pointer;
         }
+
+        .btn-add-cart {
+            background-color: #6f4e37;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 0.95rem;
+            width: 100%;
+            margin-top: 1rem;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .btn-add-cart:hover {
+            background-color: #523927;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -100,29 +111,25 @@
         <div class="logo">
             <h1>Bean Boutique</h1>
         </div>
-        <nav>
+       <nav>
             <ul>
-                <!-- Home Menu with Sub-Menu -->
-                <li class="dropdown">
-                    <a href="index.html" class="active">Home <i class="bi bi-chevron-down ms-1"></i></a>
-                    <ul class="dropdown-menu-custom">
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="story.html">Our Story</a></li>
-                        <li><a href="location.html">Location & Hours</a></li>
-                    </ul>
-                </li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="coffee.html">Coffee Selection</a></li>
                 <li><a href="equipment.html">Brewing Equipment</a></li>
                 <li><a href="events.html">Events</a></li>
-                
-                <!-- Modal Trigger Link for Shopping Cart -->
                 <li>
                     <a class="cart-nav-link" id="cartModalTrigger">
                         Shopping Cart <span class="badge bg-warning text-dark" id="cartCountBadge">0</span>
                     </a>
                 </li>
-                
-                <li><a href="offers.html">Special Offers</a></li>
+                <li class="dropdown">
+                    <a href="offers.html" class="active">Special Offers</a>
+                    <ul class="dropdown-menu-custom">
+                        <li><a href="seasonalSpecial.html">Seasonal Specials</a></li>
+                        <li><a href="baristaChoice.html">Barista's Choice</a></li>
+                        <li><a href="bundleDeals.html">Bundle Deals</a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </header>
@@ -184,17 +191,35 @@
         </div>
 
         <div class="grid-container">
-            <div class="coffee-box">
-                <h3>Artisan Coffee Beans</h3>
-                <p>Hand-picked, perfectly roasted coffee beans available for order.</p>
+            <div class="coffee-box d-flex flex-column justify-content-between">
+                <div>
+                    <h3>Featured Single Origin</h3>
+                    <p>Ethically harvested, perfectly roasted Ethiopian Yirgacheffe beans.</p>
+                    <p class="fw-bold fs-5 text-dark mt-2 mb-0">£14.50</p>
+                </div>
+                <button class="btn btn-add-cart add-to-cart-btn" data-title="Featured Single Origin" data-subtitle="250g Bag - Whole Bean" data-price="14.50">
+                    <i class="bi bi-bag-plus me-1"></i> Add to Cart
+                </button>
             </div>
-            <div class="coffee-box">
-                <h3>Warm Community Spaces</h3>
-                <p>Read about our local shop story and barista workspace choices.</p>
+            <div class="coffee-box d-flex flex-column justify-content-between">
+                <div>
+                    <h3>Signature Starter Pack</h3>
+                    <p>Includes 250g Velvet Blend + Ceramic V60 Pour Over Set.</p>
+                    <p class="fw-bold fs-5 text-dark mt-2 mb-0">£35.00</p>
+                </div>
+                <button class="btn btn-add-cart add-to-cart-btn" data-title="Signature Starter Pack" data-subtitle="Blend + Dripper Set" data-price="35.00">
+                    <i class="bi bi-bag-plus me-1"></i> Add to Cart
+                </button>
             </div>
-            <div class="coffee-box">
-                <h3>Modern Equipment</h3>
-                <p>Explore tools designed to maximize your coffee extraction accuracy.</p>
+            <div class="coffee-box d-flex flex-column justify-content-between">
+                <div>
+                    <h3>Pro Espresso Gear</h3>
+                    <p>Explore high-performance home espresso tools and grinders.</p>
+                    <p class="fw-bold fs-5 text-dark mt-2 mb-0">£189.00</p>
+                </div>
+                <button class="btn btn-add-cart add-to-cart-btn" data-title="Pro-Pump Espresso Machine" data-subtitle="15-Bar Pressure System" data-price="189.00">
+                    <i class="bi bi-bag-plus me-1"></i> Add to Cart
+                </button>
             </div>
         </div>
       </section>
@@ -292,118 +317,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            function getCart() {
-                return JSON.parse(localStorage.getItem('beanBoutiqueCart')) || [];
-            }
-
-            const cartModalEl = document.getElementById('cartModal');
-            const cartModalInstance = new bootstrap.Modal(cartModalEl);
-            const cartCountBadge = document.getElementById('cartCountBadge');
-            const cartItemsContainer = document.getElementById('cartItemsContainer');
-            const cartSubtotal = document.getElementById('cartSubtotal');
-
-            updateCartUI();
-
-            const cartTrigger = document.getElementById("cartModalTrigger");
-            if (cartTrigger) {
-                cartTrigger.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    cartModalInstance.show();
-                });
-            }
-
-            function updateCartUI() {
-                const cart = getCart();
-                const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-                
-                if (cartCountBadge) {
-                    cartCountBadge.textContent = totalItems;
-                }
-
-                if (!cartItemsContainer) return;
-
-                if (cart.length === 0) {
-                    cartItemsContainer.innerHTML = `
-                        <tr>
-                            <td colspan="4" class="text-center py-4 text-muted">Your basket is currently empty. Add items to see them here!</td>
-                        </tr>`;
-                    if (cartSubtotal) cartSubtotal.textContent = '£0.00';
-                    return;
-                }
-
-                let subtotal = 0;
-                cartItemsContainer.innerHTML = cart.map(item => {
-                    const itemTotal = item.price * item.qty;
-                    subtotal += itemTotal;
-                    return `
-                        <tr>
-                            <td>
-                                <strong>${item.title}</strong><br>
-                                <small class="text-muted">${item.subtitle || ''}</small>
-                            </td>
-                            <td class="text-center">${item.qty}</td>
-                            <td class="text-end">£${item.price.toFixed(2)}</td>
-                            <td class="text-end">£${itemTotal.toFixed(2)}</td>
-                        </tr>
-                    `;
-                }).join('');
-
-                if (cartSubtotal) {
-                    cartSubtotal.textContent = `£${subtotal.toFixed(2)}`;
-                }
-            }
-
-            const checkoutBtn = document.getElementById("checkoutBtn");
-            if (checkoutBtn) {
-                checkoutBtn.addEventListener("click", () => {
-                    const cart = getCart();
-                    if (cart.length === 0) {
-                        alert('Your basket is empty!');
-                    } else {
-                        alert('Checkout function will be available once back-end databases are linked!');
-                        cartModalInstance.hide();
-                    }
-                });
-            }
-
-            cartModalEl.addEventListener('hidden.bs.modal', () => {
-                document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
-                document.body.classList.remove('modal-open');
-                document.body.style.overflow = '';
-                document.body.style.paddingRight = '';
-            });
-
-            const promoModal = document.getElementById("welcomeModal");
-            const closeBtn = document.getElementById("closeModalBtn");
-
-            if (promoModal && closeBtn) {
-                setTimeout(() => {
-                    promoModal.classList.add("active");
-                }, 1200);
-
-                closeBtn.addEventListener("click", () => {
-                    promoModal.classList.remove("active");
-                });
-            }
-
-            const backToTopBtn = document.getElementById("backToTopBtn");
-            if (backToTopBtn) {
-                window.addEventListener("scroll", () => {
-                    if (window.scrollY > 300) {
-                        backToTopBtn.classList.add("show");
-                    } else {
-                        backToTopBtn.classList.remove("show");
-                    }
-                });
-
-                backToTopBtn.addEventListener("click", () => {
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                });
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
