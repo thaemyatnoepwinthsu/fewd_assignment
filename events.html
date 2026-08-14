@@ -7,14 +7,11 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* Back to Top Button Styling */
         #backToTopBtn {
             position: fixed;
             bottom: 30px;
@@ -39,29 +36,38 @@
             visibility: visible;
         }
 
-        #backToTopBtn:hover {
-            background-color: #523927;
-            transform: translateY(-3px);
-        }
-
-        /* Footer Map Section Styling */
         .footer-map-container {
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        /* Event Card Meta Text */
         .event-meta {
             font-size: 0.9rem;
             color: #666;
             margin-bottom: 0.4rem;
         }
 
-        /* Modal Nav Trigger Cursor */
         .cart-nav-link {
             cursor: pointer;
             user-select: none;
+        }
+
+        .btn-add-cart {
+            background-color: #6f4e37;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 0.95rem;
+            width: 100%;
+            margin-top: 1rem;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .btn-add-cart:hover {
+            background-color: #523927;
+            color: white;
         }
     </style>
 </head>
@@ -73,26 +79,23 @@
         </div>
         <nav>
             <ul>
-               <li class="dropdown">
-                    <a href="index.html" >Home <i class="bi bi-chevron-down ms-1"></i></a>
-                    <ul class="dropdown-menu-custom">
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="story.html">Our Story</a></li>
-                        <li><a href="location.html">Location & Hours</a></li>
-                    </ul>
-                </li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="coffee.html">Coffee Selection</a></li>
                 <li><a href="equipment.html">Brewing Equipment</a></li>
-                <li><a href="events.html" class="active">Events</a></li>
-                
-                <!-- Modal Trigger Link for Shopping Cart -->
+                <li><a href="events.html">Events</a></li>
                 <li>
                     <a class="cart-nav-link" id="cartModalTrigger">
                         Shopping Cart <span class="badge bg-warning text-dark" id="cartCountBadge">0</span>
                     </a>
                 </li>
-                
-                <li><a href="offers.html">Special Offers</a></li>
+                <li class="dropdown">
+                    <a href="offers.html" class="active">Special Offers</a>
+                    <ul class="dropdown-menu-custom">
+                        <li><a href="seasonalSpecial.html">Seasonal Specials</a></li>
+                        <li><a href="baristaChoice.html">Barista's Choice</a></li>
+                        <li><a href="bundleDeals.html">Bundle Deals</a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </header>
@@ -104,60 +107,70 @@
                 <p>Join our expert baristas and master roasters for hands-on learning experiences and coffee tasting sessions.</p>
             </div>
 
-            <!-- Workshop Cards Grid -->
             <div class="grid-container mb-5">
                 
-                <!-- Workshop 1 -->
-                <div class="coffee-box text-start">
-                    <img src="images/img5.jpg" alt="Coffee Tasting Workshop">
-                    <div class="d-flex justify-content-between align-items-center mt-3 mb-2">
-                        <h3 class="m-0 fs-5">Coffee Tasting Sessions</h3>
-                        <span class="badge bg-warning text-dark">$25 / person</span>
+                <div class="coffee-box text-start d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="images/img5.jpg" alt="Coffee Tasting Workshop">
+                        <div class="d-flex justify-content-between align-items-center mt-3 mb-2">
+                            <h3 class="m-0 fs-5">Coffee Tasting Sessions</h3>
+                            <span class="badge bg-warning text-dark">£25 / person</span>
+                        </div>
+                        <p style="margin: 0.5rem 0; color: #555; font-size: 0.95rem;">
+                            Explore origin profiles and learn sensory cupping techniques to identify subtle floral, fruity, and chocolate tasting notes.
+                        </p>
+                        <hr class="my-2">
+                        <div class="event-meta"><i class="bi bi-calendar-event text-warning me-2"></i>Every Saturday</div>
+                        <div class="event-meta"><i class="bi bi-clock text-warning me-2"></i>10:00 AM – 11:30 AM</div>
+                        <div class="event-meta"><i class="bi bi-geo-alt text-warning me-2"></i>Main Tasting Bar</div>
                     </div>
-                    <p style="margin: 0.5rem 0; color: #555; font-size: 0.95rem;">
-                        Explore origin profiles and learn sensory cupping techniques to identify subtle floral, fruity, and chocolate tasting notes.
-                    </p>
-                    <hr class="my-2">
-                    <div class="event-meta"><i class="bi bi-calendar-event text-warning me-2"></i>Every Saturday</div>
-                    <div class="event-meta"><i class="bi bi-clock text-warning me-2"></i>10:00 AM – 11:30 AM</div>
-                    <div class="event-meta"><i class="bi bi-geo-alt text-warning me-2"></i>Main Tasting Bar</div>
+                    <button class="btn btn-add-cart add-to-cart-btn" data-title="Coffee Tasting Workshop Pass" data-subtitle="Saturday Morning Session" data-price="25.00">
+                        <i class="bi bi-ticket-perforated me-1"></i> Reserve Ticket
+                    </button>
                 </div>
 
-                <!-- Workshop 2 -->
-                <div class="coffee-box text-start">
-                    <img src="images/image3.jpg" alt="Home Brewing Masterclass">
-                    <div class="d-flex justify-content-between align-items-center mt-3 mb-2">
-                        <h3 class="m-0 fs-5">Home Brewing Masterclass</h3>
-                        <span class="badge bg-warning text-dark">$40 / person</span>
+                <div class="coffee-box text-start d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="images/image3.jpg" alt="Home Brewing Masterclass">
+                        <div class="d-flex justify-content-between align-items-center mt-3 mb-2">
+                            <h3 class="m-0 fs-5">Home Brewing Masterclass</h3>
+                            <span class="badge bg-warning text-dark">£40 / person</span>
+                        </div>
+                        <p style="margin: 0.5rem 0; color: #555; font-size: 0.95rem;">
+                            Master V60 pour-overs, French Press, and espresso dialing. Learn grind sizes, water temperature control, and brew ratios.
+                        </p>
+                        <hr class="my-2">
+                        <div class="event-meta"><i class="bi bi-calendar-event text-warning me-2"></i>Alternate Sundays</div>
+                        <div class="event-meta"><i class="bi bi-clock text-warning me-2"></i>2:00 PM – 4:00 PM</div>
+                        <div class="event-meta"><i class="bi bi-geo-alt text-warning me-2"></i>Barista Training Lab</div>
                     </div>
-                    <p style="margin: 0.5rem 0; color: #555; font-size: 0.95rem;">
-                        Master V60 pour-overs, French Press, and espresso dialing. Learn grind sizes, water temperature control, and brew ratios.
-                    </p>
-                    <hr class="my-2">
-                    <div class="event-meta"><i class="bi bi-calendar-event text-warning me-2"></i>Alternate Sundays</div>
-                    <div class="event-meta"><i class="bi bi-clock text-warning me-2"></i>2:00 PM – 4:00 PM</div>
-                    <div class="event-meta"><i class="bi bi-geo-alt text-warning me-2"></i>Barista Training Lab</div>
+                    <button class="btn btn-add-cart add-to-cart-btn" data-title="Home Brewing Masterclass Pass" data-subtitle="Sunday Afternoon Session" data-price="40.00">
+                        <i class="bi bi-ticket-perforated me-1"></i> Reserve Ticket
+                    </button>
                 </div>
 
-                <!-- Workshop 3 -->
-                <div class="coffee-box text-start">
-                    <img src="images/image1.jpg" alt="Meet the Roaster Event">
-                    <div class="d-flex justify-content-between align-items-center mt-3 mb-2">
-                        <h3 class="m-0 fs-5">Meet-the-Roaster Event</h3>
-                        <span class="badge bg-success">Free Admission</span>
+                <div class="coffee-box text-start d-flex flex-column justify-content-between">
+                    <div>
+                        <img src="images/image1.jpg" alt="Meet the Roaster Event">
+                        <div class="d-flex justify-content-between align-items-center mt-3 mb-2">
+                            <h3 class="m-0 fs-5">Meet-the-Roaster Event</h3>
+                            <span class="badge bg-success">Free Admission</span>
+                        </div>
+                        <p style="margin: 0.5rem 0; color: #555; font-size: 0.95rem;">
+                            An exclusive Q&A evening with our head roaster covering ethical bean sourcing, batch roasting profiles, and fresh samples.
+                        </p>
+                        <hr class="my-2">
+                        <div class="event-meta"><i class="bi bi-calendar-event text-warning me-2"></i>First Friday of the Month</div>
+                        <div class="event-meta"><i class="bi bi-clock text-warning me-2"></i>6:00 PM – 7:30 PM</div>
+                        <div class="event-meta"><i class="bi bi-geo-alt text-warning me-2"></i>Roastery Lounge</div>
                     </div>
-                    <p style="margin: 0.5rem 0; color: #555; font-size: 0.95rem;">
-                        An exclusive Q&A evening with our head roaster covering ethical bean sourcing, batch roasting profiles, and fresh samples.
-                    </p>
-                    <hr class="my-2">
-                    <div class="event-meta"><i class="bi bi-calendar-event text-warning me-2"></i>First Friday of the Month</div>
-                    <div class="event-meta"><i class="bi bi-clock text-warning me-2"></i>6:00 PM – 7:30 PM</div>
-                    <div class="event-meta"><i class="bi bi-geo-alt text-warning me-2"></i>Roastery Lounge</div>
+                    <button class="btn btn-add-cart add-to-cart-btn" data-title="Meet-the-Roaster Free Pass" data-subtitle="First Friday Monthly Q&A" data-price="0.00">
+                        <i class="bi bi-ticket-perforated me-1"></i> Reserve Free Seat
+                    </button>
                 </div>
 
             </div>
 
-            <!-- Registration Form Section -->
             <div style="max-width: 600px; margin: 0 auto;">
                 <h2 class="section-title">Workshop Registration</h2>
                 
@@ -180,8 +193,8 @@
                     <div class="form-group mb-4">
                         <label for="workshop" class="form-label">Select Workshop Session *</label>
                         <select id="workshop" name="Chosen_Workshop" class="form-select">
-                            <option value="tasting">Coffee Tasting Sessions ($25)</option>
-                            <option value="brewing">Home Brewing Masterclass ($40)</option>
+                            <option value="tasting">Coffee Tasting Sessions (£25)</option>
+                            <option value="brewing">Home Brewing Masterclass (£40)</option>
                             <option value="roaster">Meet-the-Roaster Event (Free)</option>
                         </select>
                     </div>
@@ -233,12 +246,10 @@
         </div>
     </div>
 
-    <!-- Go to Top Button -->
     <button id="backToTopBtn" title="Go to top" aria-label="Scroll to top">
         <i class="bi bi-arrow-up"></i>
     </button>
 
-    <!-- Footer Section -->
     <footer class="bg-dark text-light pt-5 pb-3">
         <div class="container">
             <div class="row g-4 align-items-center">
@@ -268,114 +279,7 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // Helper to retrieve cart items array from localStorage
-            function getCart() {
-                return JSON.parse(localStorage.getItem('beanBoutiqueCart')) || [];
-            }
-
-            // Cart Modal Setup
-            const cartModalEl = document.getElementById('cartModal');
-            const cartModalInstance = new bootstrap.Modal(cartModalEl);
-            const cartCountBadge = document.getElementById('cartCountBadge');
-            const cartItemsContainer = document.getElementById('cartItemsContainer');
-            const cartSubtotal = document.getElementById('cartSubtotal');
-
-            // Synchronize cart UI with localStorage on initial page load
-            updateCartUI();
-
-            const cartTrigger = document.getElementById("cartModalTrigger");
-            if (cartTrigger) {
-                cartTrigger.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    cartModalInstance.show();
-                });
-            }
-
-            // Render shopping basket contents dynamically
-            function updateCartUI() {
-                const cart = getCart();
-                const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-                
-                if (cartCountBadge) {
-                    cartCountBadge.textContent = totalItems;
-                }
-
-                if (!cartItemsContainer) return;
-
-                if (cart.length === 0) {
-                    cartItemsContainer.innerHTML = `
-                        <tr>
-                            <td colspan="4" class="text-center py-4 text-muted">Your basket is currently empty. Add items to see them here!</td>
-                        </tr>`;
-                    if (cartSubtotal) cartSubtotal.textContent = '£0.00';
-                    return;
-                }
-
-                let subtotal = 0;
-                cartItemsContainer.innerHTML = cart.map(item => {
-                    const itemTotal = item.price * item.qty;
-                    subtotal += itemTotal;
-                    return `
-                        <tr>
-                            <td>
-                                <strong>${item.title}</strong><br>
-                                <small class="text-muted">${item.subtitle || ''}</small>
-                            </td>
-                            <td class="text-center">${item.qty}</td>
-                            <td class="text-end">£${item.price.toFixed(2)}</td>
-                            <td class="text-end">£${itemTotal.toFixed(2)}</td>
-                        </tr>
-                    `;
-                }).join('');
-
-                if (cartSubtotal) {
-                    cartSubtotal.textContent = `£${subtotal.toFixed(2)}`;
-                }
-            }
-
-            // Checkout Button
-            const checkoutBtn = document.getElementById("checkoutBtn");
-            if (checkoutBtn) {
-                checkoutBtn.addEventListener("click", () => {
-                    const cart = getCart();
-                    if (cart.length === 0) {
-                        alert('Your basket is empty!');
-                    } else {
-                        alert('Checkout function will be available once back-end databases are linked!');
-                        cartModalInstance.hide();
-                    }
-                });
-            }
-
-            // Cleanup modal backdrop artifacts
-            cartModalEl.addEventListener('hidden.bs.modal', () => {
-                document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
-                document.body.classList.remove('modal-open');
-                document.body.style.overflow = '';
-                document.body.style.paddingRight = '';
-            });
-
-            // Back to Top Button Logic
-            const backToTopBtn = document.getElementById("backToTopBtn");
-            if (backToTopBtn) {
-                window.addEventListener("scroll", () => {
-                    if (window.scrollY > 300) {
-                        backToTopBtn.classList.add("show");
-                    } else {
-                        backToTopBtn.classList.remove("show");
-                    }
-                });
-
-                backToTopBtn.addEventListener("click", () => {
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                });
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
