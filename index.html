@@ -275,7 +275,7 @@
             <span class="close-promo-btn" id="closeModalBtn">&times;</span>
             <h2>Exclusive 10% Discount!</h2>
             <p>Join the Bean Boutique newsletter loop today and unlock 10% off your first bean delivery purchase.</p>
-            <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Thank you for signing up!'); document.getElementById('welcomeModal').classList.remove('active');">
+            <form action="#" method="POST" id="promoForm">
                 <div class="mb-3">
                     <input type="email" class="form-control" placeholder="Enter your email address" required>
                 </div>
@@ -318,5 +318,45 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
+
+    <!-- PROMO MODAL CONTROL SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const promoModal = document.getElementById('welcomeModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const promoForm = document.getElementById('promoForm');
+
+            // Open popup when the page loads
+            if (promoModal) {
+                promoModal.classList.add('active');
+            }
+
+            // Function to hide modal
+            const hideModal = () => {
+                promoModal.classList.remove('active');
+            };
+
+            // Close modal when clicking top-right (X)
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', hideModal);
+            }
+
+            // Close modal when clicking anywhere outside the popup box
+            window.addEventListener('click', (event) => {
+                if (event.target === promoModal) {
+                    hideModal();
+                }
+            });
+
+            // Handle form submission inside modal
+            if (promoForm) {
+                promoForm.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    alert('Thank you for signing up! Use promo code WELCOME10 at checkout for 10% off.');
+                    hideModal();
+                });
+            }
+        });
+    </script>
 </body>
 </html>
